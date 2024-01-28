@@ -21,15 +21,24 @@ public class Usuario implements UserDetails {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false)
     private String login;
+
+    @Column(nullable = false)
     private String senha;
+
+    @Column(nullable = false)
     private UsuarioRole usuarioRole;
 
-    public Usuario(String nome, String login, String senha) {
+    public Usuario(String nome, String login, String senha, UsuarioRole usuarioRole) {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
+        this.usuarioRole = usuarioRole;
     }
 
     @Override
@@ -58,21 +67,21 @@ public class Usuario implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
