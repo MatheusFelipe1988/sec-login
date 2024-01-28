@@ -40,7 +40,7 @@ public class AuthService implements AuthenticatiService {
             Algorithm algorithm = Algorithm.HMAC256("key-secret");
 
             return JWT.create()
-                    .withIssuer("Authentication")
+                    .withIssuer("authentication")
                     .withSubject(usuario.getLogin())
                     .withExpiresAt(dataExpire())
                     .sign(algorithm);
@@ -54,18 +54,19 @@ public class AuthService implements AuthenticatiService {
             Algorithm algorithm = Algorithm.HMAC256("key-secret");
 
             return JWT.require(algorithm)
-                    .withIssuer("Authentication")
+                    .withIssuer("authentication")
                     .build()
                     .verify(token)
                     .getSubject();
 
 
         }catch (JWTVerificationException exception){
-            return " ";
+            return "";
         }
     }
 
     private Instant dataExpire() {
-        return LocalDateTime.now().plusHours(1).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusHours(5)
+                .toInstant(ZoneOffset.of("-03:00"));
     }
 }
