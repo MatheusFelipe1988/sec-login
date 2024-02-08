@@ -2,6 +2,7 @@ package com.sec.authentication.service.implementation;
 
 import com.sec.authentication.domain.Usuario;
 import com.sec.authentication.dto.UsuarioDTO;
+import com.sec.authentication.exception.BusinessException;
 import com.sec.authentication.repository.UsuarioRepository;
 import com.sec.authentication.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class UsuarioServiceImpli implements UsuarioService {
         Usuario existUsuario = repository.findByLogin(usuarioDTO.login());
 
         if(existUsuario != null){
-            throw new RuntimeException("User exist");
+            throw new BusinessException("User exist");
         }
 
         var passwordHash = passwordEncoder.encode(usuarioDTO.senha());
